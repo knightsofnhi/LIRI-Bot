@@ -17,10 +17,13 @@ function spotifyThis(songName) {
         type: "track",
         query: term,
     }, function (error, results) {
-        console.log(results.tracks.items[0]);
+        // console.log(results.tracks.items[0]);
         const songInfo = results.tracks.items[0];
-        console.log(songInfo.album.name);
-        console.log(songInfo.artists.name);
+        console.log(`Artist Name: ${songInfo.artists[0].name}`);
+        console.log(`Song: ${songInfo.name}`);
+        // console.log(songinfo.external_urls.spotify.value);
+        console.log(`Album: ${songInfo.album.name}`);
+        
     })
 }
 
