@@ -5,8 +5,3 @@ exports.spotify = {
   secret: process.env.SPOTIFY_SECRET
 
 };
-
-exports.OMDB = {
-  key: "http://www.omdbapi.com/?apikey=trilogy&"
-
-};
