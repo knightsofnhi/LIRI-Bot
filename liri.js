@@ -18,13 +18,25 @@ function spotifyThis(songName) {
         query: term,
     }, function (error, results) {
         // console.log(results.tracks.items[0]);
+        console.log("----------------------------------------------")
         const songInfo = results.tracks.items[0];
         console.log(`Artist Name: ${songInfo.artists[0].name}`);
+        console.log("----------------------------------------------")
         console.log(`Song: ${songInfo.name}`);
-        // console.log(songinfo.external_urls.spotify.value);
+        console.log("----------------------------------------------")
+        // console.log(songinfo.external_urls.spotify.value); --- need help displaying object 
+        // within object that has a URL.
         console.log(`Album: ${songInfo.album.name}`);
-        
+        console.log("----------------------------------------------")
+        // display code "The Sign" by Ace of Base if no input -- need help
+        // const userInput = search.value;
+        // if (userInput === 0) {
+        //     console.log("The Sign by Ace of Base")
+        // }
+
     })
+
+
 }
 
 if (search === "spotify-this-song") {
@@ -48,6 +60,7 @@ function getBand(band) {
                 console.log(`${band} is not touring.`)
             } else {
                 for (var i = 0; i < artist.length; i++) {
+                    console.log("----------------------------------------------")
                     console.log("Concert Venue: " + artist[i].venue.name);
                     console.log("Location: " + artist[i].venue.city);
                     console.log("Date: " + moment(artist[i].datetime).format('MMM DD, YYYY'));
@@ -72,38 +85,58 @@ function getMovie(movie) {
     axios.get(omdbURL).then(
         function (response) {
             const myMovie = response.data;
-            console.log(myMovie.Title);
-            console.log(myMovie.Year);
-            console.log(myMovie.imdbRating);
-            console.log(myMovie.Ratings[1].Value)
-            console.log(myMovie.Country);
-            console.log(myMovie.Language);
-            console.log(myMovie.Plot);
-            console.log(myMovie.Actors);
+            console.log("----------------------------------------------")
+            console.log(`Title: ${myMovie.Title}`);
+            console.log("----------------------------------------------")
+            console.log(`Year: ${myMovie.Year}`);
+            console.log("----------------------------------------------")
+            console.log(`IMDB Rating: ${myMovie.imdbRating}`);
+            console.log("----------------------------------------------")
+            console.log(`Rotten Tomatoes Rating: ${myMovie.Ratings[1].Value}`)
+            console.log("----------------------------------------------")
+            console.log(`Country: ${myMovie.Country}`);
+            console.log("----------------------------------------------")
+            console.log(`Language(s): ${myMovie.Language}`);
+            console.log("----------------------------------------------")
+            console.log(`Plot: ${myMovie.Plot}`);
+            console.log("----------------------------------------------")
+            console.log(`Actors: ${myMovie.Actors}`);
         }
     ).catch(
         function (error) {
             console.log(error)
+            // need to output for Mr. Nobody if no data --- need help.
         }
     )
 }
 
+// function doWhatitsays() {
+//     fs.readFile("random.txt", "utf8", function(error, data) {
+//         if (err) {
+//         return console.log(error);
+//         }
+//         // spotifyThis(songName)
+//         var dataArr = data.split(",");
+
+//         txtFile = dataArr[0];
+//         song = dataArr[1];
+//         switchCase(txtfile, song);
+
+//     });
+// }
+
 function doWhatitsays() {
-    fs.readFile("random.txt", "utf8", function (error, data) {
-        let fileContent = data.split(",");
-        const searchTerm = fileContent[0];
-        const searchItem = fileContent[1];
-        
-        if (searchTerm === "spotify-this-song") {
-            console.log(searchItem);
-            spotifyThis(searchItem.slice(1,-1));
-            
-        } else if (searchTerm === "concert-this") {
-            getBand(searchItem);
-        } else if (searchTerm === "movie-this") {
-            getMovie(searchItem);
-        } else if (searchTerm === "do-what-it-says") {
-            doWhatitsays();
-        }
-    })
-}
+    //read the file random.txt
+    fs.readFile("random.txt", "utf8", function (err, data) {
+      if (err) {
+        return console.log(error);
+      }
+      //catch data and split to separate objects in new array
+      var dataArr = data.split(",");
+   
+      //take objects from random.txt to pass in as parameters
+      txtFile = dataArr[0];
+      song = dataArr[1];
+      switchCase(txtFile, song);
+    });
+   };
